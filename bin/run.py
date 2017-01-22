@@ -11,9 +11,10 @@ import platform
 class WIFIonICE:
 
     TRAFFIC_LIMIT = 180
+    WIFI_SSID = "WIFIonICE"
 
     def __init__(self):
-        self.logger = logging.getLogger("WIFIonICE")
+        self.logger = logging.getLogger(self.WIFI_SSID)
         self.init_usage = self.traffic_usage()
 
         if self.init_usage >= self.TRAFFIC_LIMIT:
@@ -36,7 +37,7 @@ class WIFIonICE:
 
     def reconnect(self):
         network_setup = sh.Command("/usr/sbin/networksetup")
-        network_setup("-removepreferredwirelessnetwork", "en0", "WIFIonICE")
+        network_setup("-removepreferredwirelessnetwork", "en0", self.WIFI_SSID)
 
         scutil = sh.Command("/usr/sbin/scutil")
         scutil("–-set", "HostName", self.generate_new_hostname())
@@ -44,7 +45,7 @@ class WIFIonICE:
         ifconfig = sh.Command("/sbin/ifconfig")
         ifconfig("en0", "ether", self.generate_new_mac())
 
-        network_setup("-setairportnetwork", "en0", "WIFIonICE")
+        network_setup("-setairportnetwork", "en0", self.WIFI_SSID)
         self.init_usage = self.traffic_usage()
 
     def generate_new_mac(self):
