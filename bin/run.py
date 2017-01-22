@@ -75,6 +75,7 @@ class WIFIonICE:
 
             if traffic_usage >= self.init_usage:
                 self.logger.info("Traffic Usage exeeded. Reconnecting now...")
+                self.reconnect()
 
             time.sleep(5)
 
