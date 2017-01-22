@@ -1,6 +1,8 @@
 WIFIonICE Helper
 ================
 
+![WIFIonICE](https://server.tyrola.at/WIFIonICE.png)
+
 This tool improves your WIFI usage on ICE.
 
 Currently it only supports MacOS and needs to be executed with root privileges. 
