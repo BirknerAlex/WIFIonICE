@@ -1,7 +1,7 @@
 WIFIonICE Helper
 ================
 
-![WIFIonICE](https://server.tyrola.at/WIFIonICE.png)
+![WIFIonICE](https://www.iconfinder.com/icons/1679653/download/png/128)
 
 This tool improves your WIFI usage on ICE.
 
