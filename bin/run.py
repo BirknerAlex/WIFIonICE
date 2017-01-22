@@ -23,11 +23,11 @@ class WIFIonICE:
 
         self.run()
 
-    """
-    Returns the current traffic usage from the network interfaces
-
-    """
     def traffic_usage(self):
+        """
+        Returns the current traffic usage from the network interfaces in MB
+        :return: int
+        """
         psutil.net_io_counters()
 
         sent = int(psutil.net_io_counters().bytes_sent) / 1000000
@@ -36,6 +36,9 @@ class WIFIonICE:
         return round(sent + received)
 
     def reconnect(self):
+        """
+        Reconnects the WIFI connection with new MAC address and hostname
+        """
         network_setup = sh.Command("/usr/sbin/networksetup")
         network_setup("-removepreferredwirelessnetwork", "en0", self.WIFI_SSID)
 
@@ -49,6 +52,10 @@ class WIFIonICE:
         self.init_usage = self.traffic_usage()
 
     def generate_new_mac(self):
+        """
+        Generates a random valid MAC address
+        :return: string
+        """
         mac = [ 0x00, 0x16, 0x3e,
                 random.randint(0x00, 0x7f),
                 random.randint(0x00, 0xff),
@@ -57,6 +64,10 @@ class WIFIonICE:
         return ':'.join(map(lambda x: "%02x" % x, mac))
 
     def generate_new_hostname(self):
+        """
+        Generates a random hostname
+        :return: string
+        """
         random_string = str(uuid.uuid4())
         random_string = random_string.upper()
         random_string = random_string.replace("-", "")
